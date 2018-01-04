@@ -13,7 +13,7 @@ MODEL = None
 STYLES = None
 PARAMS_PATH = os.path.join(os.getcwd(), 'model/params/21styles.params')
 STYLE_SIZE = 512
-CONTENT_SIZE = 512
+MAX_CONTENT_SIZE = 800
 STYLE_FOLDER = 'model/images/styles/'
 STYLE_IMAGES = ['candy.jpg', 'composition_vii.jpg', 'escher_sphere.jpg', 'feathers.jpg', 'frida_kahlo.jpg',
                 'la_muse.jpg', 'mosaic.jpg', 'mosaic_ducks_massimo.jpg', 'pencil.jpg', 'picasso_selfport1907.jpg',
@@ -78,6 +78,7 @@ def process():
 
     style_num = int(request.args.get('style', '-1'))
     img_name = request.args.get('image', '')
+    content_size = request.args.get('size', None)
 
     if style_num >= len(STYLES) or style_num < 0 or img_name == '':
         abort(400)
@@ -85,7 +86,9 @@ def process():
     gen_img_name = img_name.rsplit('.')[0] + '-style-' + str(style_num) + '.jpg'
     if not os.path.exists(os.path.join(OUTPUT_FOLDER, gen_img_name)):
         img_path = safe_join(UPLOAD_FOLDER, img_name)
-        content_image = utils.tensor_load_rgbimage(img_path, CTX, size=CONTENT_SIZE, keep_asp=True)
+        if content_size is not None:
+            content_size = min(MAX_CONTENT_SIZE, int(content_size))
+        content_image = utils.tensor_load_rgbimage(img_path, CTX, size=content_size, keep_asp=True)
         MODEL.setTarget(STYLES[style_num])
         output = MODEL(content_image)
         utils.tensor_save_bgrimage(output[0], safe_join(OUTPUT_FOLDER, gen_img_name))
