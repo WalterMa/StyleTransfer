@@ -8,7 +8,7 @@ from model import utils
 
 # model params
 NGF = 128
-CTX = mx.cpu(0)
+CTX = mx.gpu(0)
 MODEL = None
 STYLES = None
 PARAMS_PATH = os.path.join(os.getcwd(), 'model/params/21styles.params')
@@ -79,7 +79,7 @@ def process():
     style_num = int(request.args.get('style', '-1'))
     img_name = request.args.get('image', '')
 
-    if style_num > len(STYLES) or style_num < 0 or img_name == '':
+    if style_num >= len(STYLES) or style_num < 0 or img_name == '':
         abort(400)
 
     gen_img_name = img_name.rsplit('.')[0] + '-style-' + str(style_num) + '.jpg'

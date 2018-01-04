@@ -1,10 +1,10 @@
 import numpy as np
 import mxnet as mx
-from mxnet.gluon import nn, Block
+from mxnet.gluon import nn, Block, HybridBlock
 import mxnet.ndarray as F
 
 
-class InstanceNorm(Block):
+class InstanceNorm(HybridBlock):
     def __init__(self, axis=1, momentum=0.9, epsilon=1e-5, center=True, scale=False,
                  beta_initializer='zeros', gamma_initializer='ones',
                  in_channels=0, **kwargs):
@@ -19,7 +19,7 @@ class InstanceNorm(Block):
                                     shape=(in_channels,), init=beta_initializer,
                                     allow_deferred_init=True)
 
-    def forward(self, x, gamma, beta):
+    def hybrid_forward(self, F, x, gamma, beta):
         return F.InstanceNorm(x, gamma, beta,
                               name='fwd', **self._kwargs)
 
