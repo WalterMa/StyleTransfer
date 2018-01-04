@@ -83,7 +83,7 @@ def process():
     if style_num >= len(STYLES) or style_num < 0 or img_name == '':
         abort(400)
 
-    gen_img_name = img_name.rsplit('.')[0] + '-style-' + str(style_num) + '.jpg'
+    gen_img_name = img_name.rsplit('.', 1)[0] + '-style-' + str(style_num) + '.jpg'
     if not os.path.exists(os.path.join(OUTPUT_FOLDER, gen_img_name)):
         img_path = safe_join(UPLOAD_FOLDER, img_name)
         if content_size is not None:
