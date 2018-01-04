@@ -5,3 +5,5 @@
 .idea
 images/upload/*
 images/gen/*
+!images/gen/.gitkeep
+!images/upload/.gitkeep
