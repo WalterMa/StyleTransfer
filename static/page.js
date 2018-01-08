@@ -44,15 +44,15 @@ function imgPreview(fileDom){
 
 $("#uploadbutton").click(function () {  
   var myFormData = new FormData();
-  if (selectPicture === undefined && fileList[0]!=""){
+  if (selectPicture == "" && fileList[0]!=""){
       myjson = {
-      photo:fileList[0]
+      image:fileList[0]
       // styletype:radioValue,
       // timestamp:Date.parse(new Date())
     } 
-  }else if(selectPicture != "" && fileList[0] === undefined){
+  }else if(selectPicture != "" && fileList[0] == ""){
     myjson = {
-      photo:selectPicture
+      image:selectPicture
     }    
   }else{
     alert("wrong!");

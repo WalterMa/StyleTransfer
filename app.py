@@ -27,6 +27,7 @@ UPLOAD_FOLDER = os.path.join(os.getcwd(), 'images/upload')
 OUTPUT_FOLDER = os.path.join(os.getcwd(), 'images/gen')
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = '123456'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['OUTPUT_FOLDER'] = OUTPUT_FOLDER
 
@@ -36,33 +37,23 @@ def hello_world():
     return render_template('mainpage.html')
 
 
-@app.route('/upload', methods=['POST', 'GET'])
+@app.route('/upload', methods=['POST'])
 def upload_image():
-    if request.method == 'POST':
-        # check if the post request has the file part
-        if 'file' not in request.files:
-            flash('No file part')
-            return redirect(request.url)
-        img_file = request.files['file']
-        # if user does not select file, browser also
-        # submit a empty part without filename
-        if img_file.filename == '':
-            flash('No selected file')
-            return redirect(request.url)
-        if img_file and allowed_file(img_file.filename):
-            filename = secure_filename(img_file.filename)
-            img_file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return redirect(url_for('uploaded_image',
-                                    filename=filename))
-    return '''
-        <!doctype html>
-        <title>Upload new File</title>
-        <h1>Upload new File</h1>
-        <form method=post enctype=multipart/form-data>
-          <p><input type=file name=file>
-             <input type=submit value=Upload>
-        </form>
-        '''
+    # check if the post request has the file part
+    if 'file' not in request.files:
+        flash('No file part')
+        return redirect(request.url)
+    img_file = request.files['image']
+    # if user does not select file, browser also
+    # submit a empty part without filename
+    if img_file.filename == '':
+        flash('No selected file')
+        return redirect(request.url)
+    if img_file and allowed_file(img_file.filename):
+        filename = secure_filename(img_file.filename)
+        img_file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        return redirect(url_for('uploaded_image',
+                                filename=filename))
 
 
 @app.route('/upload/<filename>')
@@ -83,15 +74,18 @@ def process():
     if style_num >= len(STYLES) or style_num < 0 or img_name == '':
         abort(400)
 
-    gen_img_name = img_name.rsplit('.', 1)[0] + '-style-' + str(style_num) + '.jpg'
+    gen_img_name = img_name.rsplit(
+        '.', 1)[0] + '-style-' + str(style_num) + '.jpg'
     if not os.path.exists(os.path.join(OUTPUT_FOLDER, gen_img_name)):
         img_path = safe_join(UPLOAD_FOLDER, img_name)
         if content_size is not None:
             content_size = min(MAX_CONTENT_SIZE, int(content_size))
-        content_image = utils.tensor_load_rgbimage(img_path, CTX, size=content_size, keep_asp=True)
+        content_image = utils.tensor_load_rgbimage(
+            img_path, CTX, size=content_size, keep_asp=True)
         MODEL.setTarget(STYLES[style_num])
         output = MODEL(content_image)
-        utils.tensor_save_bgrimage(output[0], safe_join(OUTPUT_FOLDER, gen_img_name))
+        utils.tensor_save_bgrimage(
+            output[0], safe_join(OUTPUT_FOLDER, gen_img_name))
     return redirect(url_for('generated_image',
                             filename=gen_img_name))
 
@@ -115,10 +109,12 @@ def init_model():
     STYLES = []
     for style_name in STYLE_IMAGES:
         style_path = os.path.join(os.getcwd(), STYLE_FOLDER, style_name)
-        style_image = utils.tensor_load_rgbimage(style_path, CTX, size=STYLE_SIZE)
+        style_image = utils.tensor_load_rgbimage(
+            style_path, CTX, size=STYLE_SIZE)
         style_image = utils.preprocess_batch(style_image)
         STYLES.append(style_image)
     return
+
 
 if __name__ == '__main__':
     init_model()
