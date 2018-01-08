@@ -31,18 +31,15 @@ function imgPreview(fileDom){
   }
   //Read completed
   reader.onload = function(e) {
-
-    $("#drop_preview").html("");
-    //Get the picture's dom
     var img = document.getElementById("preview");
-    //Picture path set to read the picture
     img.src = e.target.result;
   };
     reader.readAsDataURL(selectPicture);
     // $("#preview").empty();
 }
 
-$("#uploadbutton").click(function () {  
+$("#uploadbutton").click(function () {
+  $("#uploadbutton").attr("disabled", true);
   var myFormData = new FormData();
   selectPicture = selectPicture || fileList[0]
   if(selectPicture){
@@ -60,11 +57,14 @@ $("#uploadbutton").click(function () {
   $.ajax({
     url: '/upload',  //server script to process data
     type: 'POST',
-    success: function () {
-       alert("Data Uploaded ok.");
+    success: function (data) {
+       console.log("Data Uploaded ok.");
+       $("#preview").attr("src", data);
+       $("#uploadbutton").removeAttr("disabled");
     },
     error: function(){
        alert("Data Upload error");
+       $("#uploadbutton").removeAttr("disabled");
     },
     // Form data
     data: myFormData,
@@ -77,14 +77,18 @@ $("#uploadbutton").click(function () {
 
 
 $("#processbutton").click(function () {
+  $("#processbutton").attr("disabled", true);
   $.ajax({
     url: '/process?image='+selectPicture.name+'&style='+radioValue,  //server script to process data
     type: 'GET',
-    success: function () {
-       alert("Data Uploaded ok.");
+    success: function (data) {
+       console.log("Processed.");
+       $("#preview").attr("src", data);
+       $("#processbutton").removeAttr("disabled");
     },
     error: function(){
-       alert("Data Upload error");
+       alert("Processing error");
+       $("#processbutton").removeAttr("disabled");
     },
     //Options to tell JQuery not to process data or worry about content-type
     cache: false,

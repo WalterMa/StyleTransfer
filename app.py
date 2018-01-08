@@ -1,5 +1,5 @@
 import os
-from flask import Flask, request, render_template, url_for, flash, redirect, send_from_directory, abort, safe_join
+from flask import Flask, request, render_template, url_for, flash, send_from_directory, abort, safe_join
 from werkzeug.utils import secure_filename
 import mxnet as mx
 
@@ -41,19 +41,18 @@ def hello_world():
 def upload_image():
     # check if the post request has the file part
     if 'image' not in request.files:
-        flash('No file part')
-        return redirect(request.url)
+        flash('No image file part')
+        return 'No image file part', 400
     img_file = request.files['image']
     # if user does not select file, browser also
     # submit a empty part without filename
     if img_file.filename == '':
         flash('No selected file')
-        return redirect(request.url)
+        return "No selected file", 400
     if img_file and allowed_file(img_file.filename):
         filename = secure_filename(img_file.filename)
         img_file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        return redirect(url_for('uploaded_image',
-                                filename=filename))
+        return url_for('uploaded_image', filename=filename), 200
 
 
 @app.route('/upload/<filename>')
@@ -86,8 +85,7 @@ def process():
         output = MODEL(content_image)
         utils.tensor_save_bgrimage(
             output[0], safe_join(OUTPUT_FOLDER, gen_img_name))
-    return redirect(url_for('generated_image',
-                            filename=gen_img_name))
+    return url_for('generated_image', filename=gen_img_name), 200
 
 
 @app.route('/gen/<filename>')
