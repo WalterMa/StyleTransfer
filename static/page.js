@@ -9,6 +9,7 @@ if (window.File && window.FileReader && window.FileList && window.Blob) {
   
 var selectPicname;
 var myfile,myjson = {};
+var processJson = {};
 
 function imgPreview(fileDom){
   
@@ -43,14 +44,16 @@ function imgPreview(fileDom){
 
 $("#uploadbutton").click(function () {  
   var myFormData = new FormData();
-  if (selectPicname === undefined && fileList[0]!=""){
+  if (selectPicture === undefined && fileList[0]!=""){
       myjson = {
       photo:fileList[0]
       // styletype:radioValue,
       // timestamp:Date.parse(new Date())
     } 
-  }else if(selectPicname != "" && fileList[0] === undefined){
-    photo:selectPicname
+  }else if(selectPicture != "" && fileList[0] === undefined){
+    myjson = {
+      photo:selectPicture
+    }    
   }else{
     alert("wrong!");
   }  
@@ -59,10 +62,40 @@ $("#uploadbutton").click(function () {
   for(var x in myjson){
     myFormData.append(x, myjson[x]);
   }
-
   $.ajax({
     url: '/upload',  //server script to process data
     type: 'POST',
+    success: function () {
+       alert("Data Uploaded ok.");
+    },
+    error: function(){
+       alert("Data Upload error");
+    },
+    // Form data
+    data: myFormData,
+    //Options to tell JQuery not to process data or worry about content-type
+    cache: false,
+    contentType: false,
+    processData: false
+  });
+});
+
+
+$("#processbutton").click(function () {  
+      myjson = {
+        photoname:selectPicture.name,
+        styletype:radioValue,
+        timestamp:Date.parse(new Date())
+      }
+  
+    
+  // console.log(myjson);
+  for(var x in myjson){
+    myFormData.append(x, myjson[x]);
+  }
+  $.ajax({
+    url: '/process',  //server script to process data
+    type: 'GET',
     success: function () {
        alert("Data Uploaded ok.");
     },
