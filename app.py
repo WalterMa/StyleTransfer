@@ -8,7 +8,7 @@ from model import utils
 
 # model params
 NGF = 128
-CTX = mx.gpu(0)
+CTX = mx.cpu(0)
 MODEL = None
 STYLES = None
 PARAMS_PATH = os.path.join(os.getcwd(), 'model/params/21styles.params')
@@ -33,7 +33,7 @@ app.config['OUTPUT_FOLDER'] = OUTPUT_FOLDER
 
 @app.route('/')
 def hello_world():
-    return render_template('info.html', info='Hello World!')
+    return render_template('mainpage.html')
 
 
 @app.route('/upload', methods=['POST', 'GET'])

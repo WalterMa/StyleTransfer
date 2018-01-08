@@ -1,0 +1,213 @@
+<hr />
+
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="UTF-8">
+    <title>StyleTransfer</title>
+    <link rel="stylesheet" type="text/css" href="static/mystyle.css">
+    <link rel="stylesheet" type="text/css" href="static/bootstrap-4.0.0-beta.3-dist/css/bootstrap.min.css">
+    </head>
+
+    <body>            
+        <div class="row">
+            <div class="col-sm-8 col-md-8 col-lg-8">
+                <div id="drop_area" class="showPic" style="background:url(static/bgPic.png) 
+                no-repeat;background-position:center center">                       
+                    <div class="picLocation">
+                        <div id="btnPreview"><img id="preview"/></div>
+                        <div id="drop_preview"></div> 
+                    </div>
+                </div>
+                <div class="row" style="padding-left:10%;">
+                        <div class="col-sm-4 col-md-4 col-lg-4" style="padding-left:5%">
+                                <input id="selectPic" type="file" onchange="imgPreview(this)" />
+                        </div>
+                        <div class="col-sm-4 col-md-4 col-lg-4">
+                            <input id="uploadbutton" type="button" value="Upload Picture" />
+                        </div>       
+                        <div class="col-sm-3 col-md-3 col-lg-3">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <input id="processbutton" type="button" value="Process Picture" />
+                                    </div>
+                                </div>
+                        </div>            
+                </div>
+            </div>
+            
+            <div class="col-sm-4 col-md-4 col-lg-4">
+                <div>
+                    样式选择栏
+                    <hr />
+                </div>
+                <div>
+                    <div class="row rowSpace">
+                        <div class="col-xs-4 col-md-4 col-lg-4">
+                            <input type="radio" name="radio" value="0"/>样式I 
+                        </div>
+                        <div class="col-md-4">
+                            <input type="radio" name="radio" value="1"/>样式Ⅱ 
+                        </div>
+                        <div class="col-md-4">
+                            <input type="radio" name="radio" value="2"/>样式Ⅲ 
+                        </div>
+                    </div>
+                    <div class="row rowSpace">
+                        <div class="col-md-4">
+                            <input type="radio" name="radio" value="3"/>样式IV 
+                        </div>
+                        <div class="col-md-4">
+                            <input type="radio" name="radio" value="4"/>样式Ⅴ 
+                        </div>
+                        <div class="col-md-4">
+                            <input type="radio" name="radio" value="5"/>样式Ⅵ 
+                        </div>
+                    </div>
+                    <div class="row rowSpace">
+                        <div class="col-md-4">
+                            <input type="radio" name="radio" value="6"/>样式Ⅶ 
+                        </div>
+                        <div class="col-md-4">
+                            <input type="radio" name="radio" value="7"/>样式Ⅷ 
+                        </div>
+                        <div class="col-md-4">
+                            <input type="radio" name="radio" value="8"/>样式Ⅸ 
+                        </div>
+                    </div>
+                    <div class="row rowSpace">
+                        <div class="col-md-4">
+                            <input type="radio" name="radio" value="9"/>样式Ⅹ 
+                        </div>
+                        <div class="col-md-4">
+                            <input type="radio" name="radio" value="10"/>样式XI 
+                        </div>
+                        <div class="col-md-4">
+                            <input type="radio" name="radio" value="11"/>样式XII 
+                        </div>
+                    </div>
+                    <div class="row rowSpace">
+                        <div class="col-md-4">
+                            <input type="radio" name="radio" value="12"/>样式XIII 
+                        </div>
+                        <div class="col-md-4">
+                            <input type="radio" name="radio" value="13"/>样式XIV 
+                        </div>
+                        <div class="col-md-4">
+                            <input type="radio" name="radio" value="14"/>样式XV 
+                        </div>
+                    </div>
+                    <div class="row rowSpace">
+                        <div class="col-md-4">
+                            <input type="radio" name="radio" value="15"/>样式XVI 
+                        </div>
+                        <div class="col-md-4">
+                            <input type="radio" name="radio" value="16"/>样式XVII 
+                        </div>
+                        <div class="col-md-4">
+                            <input type="radio" name="radio" value="17"/>样式XVIII
+                        </div>
+                    </div>
+                    <div class="row rowSpace">
+                        <div class="col-md-4">
+                            <input type="radio" name="radio" value="18"/>样式XIX 
+                        </div>
+                        <div class="col-md-4">
+                            <input type="radio" name="radio" value="19"/>样式XX 
+                        </div>
+                        <div class="col-md-4">
+                            <input type="radio" name="radio" value="20"/>样式XXI
+                        </div>
+                    </div>
+                </div>
+                <hr />
+                <div>
+                    样式预览：
+                </div>
+                <div class="preShow">
+                    <div id="preImgshow"></div>
+                </div>
+            </div>
+        </div>
+    <br />
+    </body>
+</html>
+
+
+<script src="static/bootstrap-4.0.0-beta.3-dist/js/bootstrap.min.js"></script>
+<script src="static/jquery-3.2.1/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="static/page.js"></script>
+
+<script>
+    var radioValue;
+    var dragPicname;
+    var myjson = {};
+    var fileList={};
+
+    $(function(){        
+        //Block browser default line 
+        $(document).on({ 
+            dragleave:function(e){    //Drag away 
+                e.preventDefault(); 
+            }, 
+            drop:function(e){  //drop 
+                e.preventDefault(); 
+            }, 
+            dragenter:function(e){    //Drag into
+                e.preventDefault(); 
+            }, 
+            dragover:function(e){    //Drag and drop 
+                e.preventDefault(); 
+            } 
+        }); 
+        var box = document.getElementById('drop_area'); //drop area 
+
+        box.addEventListener("drop",function(e){ 
+            // window.location.reload();
+            e.preventDefault(); //Cancel the default browser drag effect 
+            fileList = e.dataTransfer.files; //Get the file object
+             
+            if(fileList.length == 0){ 
+                return false; 
+            } 
+            //file is pic or not? 
+            if(fileList[0].type.indexOf('image') === -1){ 
+                alert("This is not image-type！"); 
+                return false; 
+            }         
+            //preview func
+            var img = window.webkitURL.createObjectURL(fileList[0]); 
+            console.log("img is :" + img);
+            console.log("fileList[0] :" + fileList[0]);
+            var filename = fileList[0].name; //Name of picture 
+            
+            dragPicname = filename;
+            console.log(dragPicname);
+
+            var filesize = Math.floor((fileList[0].size)/1024);  
+            if(filesize>1024){ 
+                alert("The size of img can't exceed 1MB."); 
+                return false; 
+            }                      
+
+            var str = "<img src='" + img + "'" + "style=" + 
+            "'max-width:80%;margin-left:auto; margin-right:auto; display:block;'" +">"; 
+            // $("#btnPreview").html("");
+            // $("#selectPic").html("");
+
+            $("#drop_preview").html(str);
+            // $("#selectPic").empty();
+            
+        },false);
+        $("#btnPreview").html("<img id='preview'/>");
+
+        $(":radio").click(function(){
+            radioValue = $("input[name='radio']:checked").val(); 
+            console.log(radioValue);
+            var preImgpath = "<img src='" + "static/21types/boat" + radioValue + ".jpg '" 
+            + "style=" + "'max-width:90%; display:block; padding-top:1%;'" +">";
+            console.log(preImgpath);
+            $("#preImgshow").html(preImgpath);
+        });              
+    }); 
+</script>

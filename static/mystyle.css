@@ -1,0 +1,68 @@
+/*
+ * Demo1:选取一张图片，并预览
+ */
+ .preview_box img {
+    width: 200px;
+  }
+  
+ 
+  
+  /*
+   * Demo3:label样式
+   */
+  #img_input2 {
+    display: none;
+  }
+  #img_label2 {
+    background-color: #f2d547;
+    border-radius: 5px;
+    display: inline-block;
+    padding: 10px;
+  }
+  .showPart{
+    height:400px;
+    /* widows: 50%; */
+    width: 600px;
+    padding-left: 40%;
+    /* padding-top: 40%; */
+  }
+  .showPic{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0.5%;
+    /* text-align:center; */
+    height:100%; 
+    width:80%;
+    border: 2px solid #000;
+    border-style:dashed;
+    /* padding-top:5px; */
+    margin-bottom: 15px;
+    max-width: 80%;
+    max-height: 82%;
+    
+  }
+
+  .picLocation{
+    position: relative;
+    top:50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
+
+  #preview{
+    max-width: 80%;
+    clear: both;
+    display: block;
+    margin:auto;
+  }
+  #drop_preview{
+    /* max-width: 80%; */
+    clear: both;
+    display: block;
+    margin:auto;
+  }
+
+  .rowSpace{
+    padding-bottom: 10%px;
+  }
