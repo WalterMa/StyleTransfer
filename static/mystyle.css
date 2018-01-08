@@ -4,6 +4,10 @@
  .preview_box img {
     width: 200px;
   }
+
+.loading_hide{
+    display: none;
+}
   
  
   

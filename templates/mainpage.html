@@ -27,8 +27,9 @@
                         </div>       
                         <div class="col-sm-3 col-md-3 col-lg-3">
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-8">
                                         <input id="processbutton" type="button" value="Process Picture" />
+                                        <img id="loading" class="loading_hide" src="static/loading.svg">
                                     </div>
                                 </div>
                         </div>            
@@ -136,70 +137,3 @@
 <script src="static/bootstrap-4.0.0-beta.3-dist/js/bootstrap.min.js"></script>
 <script src="static/jquery-3.2.1/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="static/page.js"></script>
-
-<script>
-    var radioValue;
-    var dragPicname;
-    var myjson = {};
-    var fileList={};
-
-    $(function(){        
-        //Block browser default line 
-        $(document).on({ 
-            dragleave:function(e){    //Drag away 
-                e.preventDefault(); 
-            }, 
-            drop:function(e){  //drop 
-                e.preventDefault(); 
-            }, 
-            dragenter:function(e){    //Drag into
-                e.preventDefault(); 
-            }, 
-            dragover:function(e){    //Drag and drop 
-                e.preventDefault(); 
-            } 
-        }); 
-        var box = document.getElementById('drop_area'); //drop area 
-
-        box.addEventListener("drop",function(e){ 
-            // window.location.reload();
-            e.preventDefault(); //Cancel the default browser drag effect 
-            fileList = e.dataTransfer.files; //Get the file object
-             
-            if(fileList.length == 0){ 
-                return false; 
-            } 
-            //file is pic or not? 
-            if(fileList[0].type.indexOf('image') === -1){ 
-                alert("This is not image-type！"); 
-                return false; 
-            }         
-            //preview func
-            var img = window.webkitURL.createObjectURL(fileList[0]); 
-            console.log("img is :" + img);
-            console.log("fileList[0] :" + fileList[0]);
-            var filename = fileList[0].name; //Name of picture 
-            
-            dragPicname = filename;
-            console.log(dragPicname);
-
-            var filesize = Math.floor((fileList[0].size)/1024);  
-            if(filesize>1024){ 
-                alert("The size of img can't exceed 1MB."); 
-                return false; 
-            }                      
-
-            $("#preview").attr("src", img);
-            
-        },false);
-
-        $(":radio").click(function(){
-            radioValue = $("input[name='radio']:checked").val(); 
-            console.log(radioValue);
-            var preImgpath = "<img src='" + "static/21types/boat" + radioValue + ".jpg '" 
-            + "style=" + "'max-width:90%; display:block; padding-top:1%;'" +">";
-            console.log(preImgpath);
-            $("#preImgshow").html(preImgpath);
-        });              
-    }); 
-</script>
