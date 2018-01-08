@@ -1,7 +1,7 @@
-import numpy as np
 import mxnet as mx
-from mxnet.gluon import nn, Block, HybridBlock
 import mxnet.ndarray as F
+import numpy as np
+from mxnet.gluon import nn, Block, HybridBlock
 
 
 class InstanceNorm(HybridBlock):

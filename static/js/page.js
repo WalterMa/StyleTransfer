@@ -9,8 +9,7 @@ if (window.File && window.FileReader && window.FileList && window.Blob) {
 }
 
 var selectPicture;
-var myfile, myjson = {};
-var processJson = {};
+var myjson = {};
 var radioValue;
 var dragPicname;
 var fileList = {};
@@ -51,7 +50,7 @@ $("#uploadbutton").click(function () {
             image: selectPicture
         }
     } else {
-        alert("wrong!");
+        alert("Please Select/Drag Image first.");
     }
 
     // console.log(myjson);
@@ -63,11 +62,13 @@ $("#uploadbutton").click(function () {
         type: 'POST',
         success: function (data) {
             alert("Image Uploaded.");
+            selectPicture = null;
             $("#preview").attr("src", data);
             $("#uploadbutton").removeAttr("disabled");
         },
         error: function () {
-            alert("emmm, something wrong when uploading.");
+            alert("emmm, something wrong when uploading.\nPlease try again.");
+            selectPicture = null;
             $("#uploadbutton").removeAttr("disabled");
         },
         // Form data
@@ -158,7 +159,7 @@ $(function () {
     $(":radio").click(function () {
         radioValue = $("input[name='radio']:checked").val();
         console.log(radioValue);
-        var preImgpath = "<img src='" + "static/21types/boat" + radioValue + ".jpg '"
+        var preImgpath = "<img src='" + "static/img/styles/" + radioValue + ".jpg '"
             + "style=" + "'max-width:90%; display:block; padding-top:1%;'" + ">";
         console.log(preImgpath);
         $("#preImgshow").html(preImgpath);

@@ -1,11 +1,11 @@
-import os
-import numbers
 import collections
-from PIL import Image
+import numbers
+import os
 
-import numpy as np
 import mxnet as mx
 import mxnet.ndarray as F
+import numpy as np
+from PIL import Image
 
 
 def tensor_load_rgbimage(filename, ctx, size=None, scale=None, keep_asp=False):

@@ -1,17 +1,17 @@
-import time
 import os
+import time
+
 import mxnet as mx
-import numpy as np
-
-from mxnet import gluon
-from mxnet import autograd
-from mxnet.gluon import Parameter
 import mxnet.ndarray as F
+import numpy as np
+from mxnet import autograd
+from mxnet import gluon
+from mxnet.gluon import Parameter
 
+import data
 import net
 import utils
 from option import Options
-import data
 
 np.set_printoptions(precision=2)
 

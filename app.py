@@ -1,7 +1,8 @@
 import os
+
+import mxnet as mx
 from flask import Flask, request, render_template, url_for, flash, send_from_directory, abort, safe_join
 from werkzeug.utils import secure_filename
-import mxnet as mx
 
 from model import net
 from model import utils
