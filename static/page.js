@@ -7,7 +7,7 @@ if (window.File && window.FileReader && window.FileList && window.Blob) {
     alert('Not support');
     }
   
-var selectPicname;
+var selectPicture;
 var myfile,myjson = {};
 var processJson = {};
 
@@ -44,13 +44,8 @@ function imgPreview(fileDom){
 
 $("#uploadbutton").click(function () {  
   var myFormData = new FormData();
-  if (selectPicture == "" && fileList[0]!=""){
-      myjson = {
-      image:fileList[0]
-      // styletype:radioValue,
-      // timestamp:Date.parse(new Date())
-    } 
-  }else if(selectPicture != "" && fileList[0] == ""){
+  selectPicture = selectPicture || fileList[0]
+  if(selectPicture){
     myjson = {
       image:selectPicture
     }    
@@ -81,20 +76,9 @@ $("#uploadbutton").click(function () {
 });
 
 
-$("#processbutton").click(function () {  
-      myjson = {
-        photoname:selectPicture.name,
-        styletype:radioValue,
-        timestamp:Date.parse(new Date())
-      }
-  
-    
-  // console.log(myjson);
-  for(var x in myjson){
-    myFormData.append(x, myjson[x]);
-  }
+$("#processbutton").click(function () {
   $.ajax({
-    url: '/process',  //server script to process data
+    url: '/process?image='+selectPicture.name+'&style='+radioValue,  //server script to process data
     type: 'GET',
     success: function () {
        alert("Data Uploaded ok.");
@@ -102,8 +86,6 @@ $("#processbutton").click(function () {
     error: function(){
        alert("Data Upload error");
     },
-    // Form data
-    data: myFormData,
     //Options to tell JQuery not to process data or worry about content-type
     cache: false,
     contentType: false,

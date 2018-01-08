@@ -40,7 +40,7 @@ def hello_world():
 @app.route('/upload', methods=['POST'])
 def upload_image():
     # check if the post request has the file part
-    if 'file' not in request.files:
+    if 'image' not in request.files:
         flash('No file part')
         return redirect(request.url)
     img_file = request.files['image']
