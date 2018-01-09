@@ -8,6 +8,7 @@ if (window.File && window.FileReader && window.FileList && window.Blob) {
     alert('Not support');
 }
 
+var imgFile;
 var selectPicture;
 var myjson = {};
 var radioValue;
@@ -44,13 +45,14 @@ function imgPreview(fileDom) {
 $("#uploadbutton").click(function () {
     $("#uploadbutton").attr("disabled", true);
     var myFormData = new FormData();
-    selectPicture = selectPicture || fileList[0]
-    if (selectPicture) {
+    imgFile = selectPicture || fileList[0]
+    if (imgFile) {
         myjson = {
-            image: selectPicture
+            image: imgFile
         }
     } else {
         alert("Please Select/Drag Image first.");
+        return;
     }
 
     // console.log(myjson);
@@ -85,7 +87,7 @@ $("#processbutton").click(function () {
     $("#processbutton").attr("disabled", true);
     $("#loading").removeClass('loading_hide');
     $.ajax({
-        url: '/process?image=' + selectPicture.name + '&style=' + radioValue,  //server script to process data
+        url: '/process?image=' + imgFile.name + '&style=' + radioValue,  //server script to process data
         type: 'GET',
         success: function (data) {
             console.log("Processed.");
