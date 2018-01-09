@@ -26,15 +26,7 @@ python main.py optim --content-image images/content/venice-boat.jpg --style-imag
 * `--style-size`: the style image size to test on.
 * `--cuda`: set it to 1 for running on GPU, 0 for CPU.
 
-<img src ="images/g1.jpg" width="260px" />
-<img src ="images/g2.jpg" width="260px" />
-<img src ="images/g3.jpg" width="260px" />
-<img src ="images/g4.jpg" width="260px" />
-<img src ="images/g5.jpg" width="260px" />
-<img src ="images/g6.jpg" width="260px" />
-<img src ="images/g7.jpg" width="260px" />
-<img src ="images/g8.jpg" width="260px" />
-<img src ="images/g9.jpg" width="260px" />
+<img src ="images/g1.jpg" width="260px" /> <img src ="images/g2.jpg" width="260px" /> <img src ="images/g3.jpg" width="260px" /> <img src ="images/g4.jpg" width="260px" /> <img src ="images/g5.jpg" width="260px" /> <img src ="images/g6.jpg" width="260px" /> <img src ="images/g7.jpg" width="260px" /> <img src ="images/g8.jpg" width="260px" /> <img src ="images/g9.jpg" width="260px" />
 
 ## Real-time Style Transfer
 <table width="100%" border="0" cellspacing="15" cellpadding="0">
@@ -74,15 +66,7 @@ python main.py eval --content-image images/content/venice-boat.jpg --style-image
 	* `--content-size`: the content image size to test on.
 	* `--cuda`: set it to 1 for running on GPU, 0 for CPU.
 
-<img src ="images/1.jpg" width="260px" />
-<img src ="images/2.jpg" width="260px" />
-<img src ="images/3.jpg" width="260px" />
-<img src ="images/4.jpg" width="260px" />
-<img src ="images/5.jpg" width="260px" />
-<img src ="images/6.jpg" width="260px" />
-<img src ="images/7.jpg" width="260px" />
-<img src ="images/8.jpg" width="260px" />
-<img src ="images/9.jpg" width="260px" />
+<img src ="images/1.jpg" width="260px" /> <img src ="images/2.jpg" width="260px" /> <img src ="images/3.jpg" width="260px" /> <img src ="images/4.jpg" width="260px" /> <img src ="images/5.jpg" width="260px" /> <img src ="images/6.jpg" width="260px" /> <img src ="images/7.jpg" width="260px" /> <img src ="images/8.jpg" width="260px" /> <img src ="images/9.jpg" width="260px" />
 
 ### Train Your Own MSG-Net Model
 0. Download the COCO dataset
