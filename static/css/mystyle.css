@@ -1,6 +1,3 @@
-/*
- * Demo1:选取一张图片，并预览
- */
 .preview_box img {
     width: 200px;
 }
@@ -70,5 +67,5 @@
 }
 
 .rowSpace {
-    padding-bottom: 10% px;
+    padding-bottom: 2%;
 }

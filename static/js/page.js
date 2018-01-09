@@ -162,7 +162,7 @@ $(function () {
         radioValue = $("input[name='radio']:checked").val();
         console.log(radioValue);
         var preImgpath = "<img src='" + "static/img/styles/" + radioValue + ".jpg '"
-            + "style=" + "'max-width:90%; display:block; padding-top:1%;'" + ">";
+            + "style=" + "'max-width: 100%; display: block; padding-top: 2%; height: 43%;'" + ">";
         console.log(preImgpath);
         $("#preImgshow").html(preImgpath);
     });

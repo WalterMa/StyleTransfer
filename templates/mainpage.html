@@ -18,9 +18,10 @@
                 <div id="btnPreview"><img id="preview"/></div>
             </div>
         </div>
-        <div class="row" style="padding-left:10%;">
+        <div class="row" name="form1" style="padding-left:10%;">
             <div class="col-sm-4 col-md-4 col-lg-4" style="padding-left:5%">
-                <input id="selectPic" type="file" onchange="imgPreview(this)"/>
+                <input name= "selectPic" id="selectPic" type="file" onchange="imgPreview(this)" style="display:none;"/>
+                <input type="button" value="Choose Picture" onclick="document.getElementById('selectPic').click()">
             </div>
             <div class="col-sm-4 col-md-4 col-lg-4">
                 <input id="uploadbutton" type="button" value="Upload Picture"/>
@@ -38,91 +39,91 @@
 
     <div class="col-sm-4 col-md-4 col-lg-4">
         <div>
-            样式选择栏
+            Style Choices :
             <hr/>
         </div>
         <div>
             <div class="row rowSpace">
                 <div class="col-xs-4 col-md-4 col-lg-4">
-                    <input type="radio" name="radio" value="0"/>样式I
+                    <input type="radio" name="radio" value="0"/>Style I
                 </div>
                 <div class="col-md-4">
-                    <input type="radio" name="radio" value="1"/>样式Ⅱ
+                    <input type="radio" name="radio" value="1"/>Style Ⅱ
                 </div>
                 <div class="col-md-4">
-                    <input type="radio" name="radio" value="2"/>样式Ⅲ
-                </div>
-            </div>
-            <div class="row rowSpace">
-                <div class="col-md-4">
-                    <input type="radio" name="radio" value="3"/>样式IV
-                </div>
-                <div class="col-md-4">
-                    <input type="radio" name="radio" value="4"/>样式Ⅴ
-                </div>
-                <div class="col-md-4">
-                    <input type="radio" name="radio" value="5"/>样式Ⅵ
+                    <input type="radio" name="radio" value="2"/>Style Ⅲ
                 </div>
             </div>
             <div class="row rowSpace">
                 <div class="col-md-4">
-                    <input type="radio" name="radio" value="6"/>样式Ⅶ
+                    <input type="radio" name="radio" value="3"/>Style IV
                 </div>
                 <div class="col-md-4">
-                    <input type="radio" name="radio" value="7"/>样式Ⅷ
+                    <input type="radio" name="radio" value="4"/>Style Ⅴ
                 </div>
                 <div class="col-md-4">
-                    <input type="radio" name="radio" value="8"/>样式Ⅸ
-                </div>
-            </div>
-            <div class="row rowSpace">
-                <div class="col-md-4">
-                    <input type="radio" name="radio" value="9"/>样式Ⅹ
-                </div>
-                <div class="col-md-4">
-                    <input type="radio" name="radio" value="10"/>样式XI
-                </div>
-                <div class="col-md-4">
-                    <input type="radio" name="radio" value="11"/>样式XII
+                    <input type="radio" name="radio" value="5"/>Style Ⅵ
                 </div>
             </div>
             <div class="row rowSpace">
                 <div class="col-md-4">
-                    <input type="radio" name="radio" value="12"/>样式XIII
+                    <input type="radio" name="radio" value="6"/>Style Ⅶ
                 </div>
                 <div class="col-md-4">
-                    <input type="radio" name="radio" value="13"/>样式XIV
+                    <input type="radio" name="radio" value="7"/>Style Ⅷ
                 </div>
                 <div class="col-md-4">
-                    <input type="radio" name="radio" value="14"/>样式XV
-                </div>
-            </div>
-            <div class="row rowSpace">
-                <div class="col-md-4">
-                    <input type="radio" name="radio" value="15"/>样式XVI
-                </div>
-                <div class="col-md-4">
-                    <input type="radio" name="radio" value="16"/>样式XVII
-                </div>
-                <div class="col-md-4">
-                    <input type="radio" name="radio" value="17"/>样式XVIII
+                    <input type="radio" name="radio" value="8"/>Style Ⅸ
                 </div>
             </div>
             <div class="row rowSpace">
                 <div class="col-md-4">
-                    <input type="radio" name="radio" value="18"/>样式XIX
+                    <input type="radio" name="radio" value="9"/>Style Ⅹ
                 </div>
                 <div class="col-md-4">
-                    <input type="radio" name="radio" value="19"/>样式XX
+                    <input type="radio" name="radio" value="10"/>Style XI
                 </div>
                 <div class="col-md-4">
-                    <input type="radio" name="radio" value="20"/>样式XXI
+                    <input type="radio" name="radio" value="11"/>Style XII
+                </div>
+            </div>
+            <div class="row rowSpace">
+                <div class="col-md-4">
+                    <input type="radio" name="radio" value="12"/>Style XIII
+                </div>
+                <div class="col-md-4">
+                    <input type="radio" name="radio" value="13"/>Style XIV
+                </div>
+                <div class="col-md-4">
+                    <input type="radio" name="radio" value="14"/>Style XV
+                </div>
+            </div>
+            <div class="row rowSpace">
+                <div class="col-md-4">
+                    <input type="radio" name="radio" value="15"/>Style XVI
+                </div>
+                <div class="col-md-4">
+                    <input type="radio" name="radio" value="16"/>Style XVII
+                </div>
+                <div class="col-md-4">
+                    <input type="radio" name="radio" value="17"/>Style XVIII
+                </div>
+            </div>
+            <div class="row rowSpace">
+                <div class="col-md-4">
+                    <input type="radio" name="radio" value="18"/>Style XIX
+                </div>
+                <div class="col-md-4">
+                    <input type="radio" name="radio" value="19"/>Style XX
+                </div>
+                <div class="col-md-4">
+                    <input type="radio" name="radio" value="20"/>Style XXI
                 </div>
             </div>
         </div>
         <hr/>
         <div>
-            样式预览：
+            Style Demo Preview ：
         </div>
         <div class="preShow">
             <div id="preImgshow"></div>
